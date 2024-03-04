@@ -1,0 +1,36 @@
+.phonebookContainer {
+  max-width: 600px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 600px;
+  background-color: #f0f0f0;
+}
+
+.addContactForm {
+  margin-bottom: 20px;
+}
+
+.contactItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.contactNumber {
+  margin-left: 20px;
+}
+
+.addContactButton {
+  margin-left: 20px;
+  border-radius: 20px;
+}
+
+.deleteButton {
+  margin-left: 20px;
+  border-radius: 20px;
+}
