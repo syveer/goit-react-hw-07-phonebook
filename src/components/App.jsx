@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { fetchContacts } from './Store/ContactSlice/ContactSlice';
 import ContactList from './ContactList/ContactList';
 import AddContactForm from './ContactForm/AddContactForm';
+import styles from './App.module.css';
 
 function App() {
   const dispatch = useDispatch();
@@ -12,12 +13,13 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="app">
+    <div className={styles.app}>
+      {' '}
+      {}
       <h1>Phone Book</h1>
       <AddContactForm />
       <ContactList />
     </div>
   );
 }
-
 export default App;

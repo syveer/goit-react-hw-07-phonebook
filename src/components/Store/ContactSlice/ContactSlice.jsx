@@ -1,25 +1,61 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
-  fetchContacts,
-  addContact,
-  deleteContact,
-} from '../ContactSlice/ContactThunks';
+  fetchContactsAPI,
+  addContactAPI,
+  deleteContactAPI,
+} from '../../ContactApi/ContactApi';
 
-const initialState = {
-  items: [],
-  isLoading: false,
-  error: null,
-};
+export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
+  try {
+    const response = await fetchContactsAPI();
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+});
 
-const contactSlice = createSlice({
-  name: 'contacts',
-  initialState,
-  error: null,
+export const addContact = createAsyncThunk(
+  'contacts/addContact',
+  async contactData => {
+    try {
+      const response = await addContactAPI(contactData);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+export const deleteContact = createAsyncThunk(
+  'contacts/deleteContact',
+  async contactId => {
+    try {
+      await deleteContactAPI(contactId);
+      return contactId;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+export const setFilter = createSlice({
+  name: 'filter',
+  initialState: '',
   reducers: {
-    setFilter(state, action) {
-      state.filter = action.payload;
+    setFilterValue: (state, action) => {
+      return action.payload;
     },
   },
+});
+
+const contactsSlice = createSlice({
+  name: 'contacts',
+  initialState: {
+    items: [],
+    isLoading: false,
+    error: null,
+  },
+  reducers: {},
   extraReducers: builder => {
     builder
       .addCase(fetchContacts.pending, state => {
@@ -63,6 +99,6 @@ const contactSlice = createSlice({
   },
 });
 
-export const { setFilter } = contactSlice.actions;
-export default contactSlice.reducer;
-export { fetchContacts, addContact, deleteContact };
+export const { setFilterValue } = setFilter.actions;
+
+export default contactsSlice.reducer;

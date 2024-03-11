@@ -18,7 +18,6 @@ function AddContactForm() {
 
   return (
     <div className={styles.phonebookContainer}>
-      <h2 className={styles.title}>Add Contact</h2>
       <form className={styles.addContactForm} onSubmit={handleSubmit}>
         <input
           type="text"
